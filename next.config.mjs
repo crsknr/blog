@@ -5,9 +5,9 @@ import remarkFootnotes from 'remark-footnotes';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  output: 'export', // Enable static export for GitHub Pages
 };
 
 const withMDX = createMDX({

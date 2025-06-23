@@ -1,0 +1,104 @@
+export const metadata = {
+  title: 'Extending the Bandwidth of Piezoelectric Transducers with Passive Compensation',
+  description: 'This post explores a practical approach to expanding the bandwidth of narrowband piezoelectric ceramic transducers, focusing on the Prowave 400PT160. After modeling the transducer’s electrical equivalent circuit, a passive R-L compensation network is designed to flatten and widen the frequency response. Optimization techniques are used to derive the ideal circuit parameters, and the resulting performance is validated through measurements and equalization.',
+  authors: [{ name: 'Christoph Kiener', url: 'https://tbd.com' }],
+};
+
+03 Dec 2024
+
+# Extending the Bandwidth of Piezoelectric Transducers with Passive Compensation
+
+This post explores a practical approach to expanding the bandwidth of narrowband piezoelectric ceramic transducers, focusing on the Prowave 400PT160. After modeling the transducer’s electrical equivalent circuit, a passive R-L compensation network is designed to flatten and widen the frequency response. Optimization techniques are used to derive the ideal circuit parameters, and the resulting performance is validated through measurements and equalization.
+
+---
+
+## Design
+
+Piezoelectric transducers are widely used in ultrasonic applications because they can radiate acoustic energy at high frequencies due to their low mass. They are available in various forms, including piezoelectric polymer films and ceramic ones.
+ 
+Piezoelectric polymer film transducers clamp a thin film of piezoelectric material between two electrodes, which vibrates when applying an AC signal, thus radiating acoustic energy. While these films can achieve appropriate bandwidths for the given requirements, they typically require high operating voltages, often exceeding $100\, \mathrm{V}$, to produce sufficient output levels. Literature indicates that such devices generate approximately $45\, \mathrm{dB\, SPL}$ at $1\, \mathrm{m}$ with  $1\, \mathrm{V_{rms}}$ excitation[^1][^2]. To achieve these voltages, transformers would be necessary, making these unsuitable for wearable systems.
+
+Piezoelectric ceramic transducers like the Prowave 400PT160 offer a more practical alternative. This off-the-shelf component operates at a center frequency of $40\, \mathrm{kHz}$, with an output level of $87\, \mathrm{dB\, SPL}$ at $1\, \mathrm{m}$ with  $1\, \mathrm{V_{rms}}$ and has a beam angle of $40^\circ$. However, its narrow bandwidth of $2\, \mathrm{kHz}$ necessitates the design of a compensation network to extend its operational range.
+
+The narrow bandwidth of these piezoelectric ceramic transducers can be described by its simple equivalent circuit model[^3]. The models' circuit is shown in figure 1. Its transfer function to the resistor $R$, which represents the external acoustic load, is described in the following equation.
+
+$$
+H(\omega) = \frac{R}{R + \left( \frac{1}{j \omega C_1} + j \omega L_1 \right)}
+$$
+
+<div className="w-full flex justify-center my-8">
+  <Cover
+    src="/blog/compensating-piezoelectric-transducers/piezo_equivalent_circuit.svg"
+    alt="Equivalent circuit of the piezoelectric transducer."
+    caption="Figure 1: Equivalent circuit of the piezoelectric transducer."
+  />
+</div>
+
+The circuit acts as a band-pass filter with a center frequency at $f_1$ = $1/(2 \pi \sqrt{L_1 C_1})$ and therefore restricting the operational bandwidth. To design a compensation network for this transducer, its equivalent circuit parameters must be determined. These can be estimated by the impedance curves' series and parallel resonance frequencies and further approximated with optimization techniques[^4]. Applying this procedure on the impedance plots given in the transducers' datasheet, yields the following circuit values: $R = 642.3\, \Omega$, $C_1 = 171.3\, \mathrm{pF}$, $L_1 = 94.3\, \mathrm{mH}$ and $C_2 = 2714.2\, \mathrm{pF}$.
+
+To broaden the bandwidth, an R-L compensation network is added to the transducer in series, which is mentioned by "High-Precision Robust Broadband Ultrasonic Location and Orientation Estimation"[^5], but not further discussed or cited. This network introduces a second pole at $f_2 = 1/(2 \pi \sqrt{L_c C_2})$ with the added elements $L_c$ and $R_c$ in the transfer function $H_{RL}(\omega)$, thus spreading the usable bandwidth.
+
+$$
+H_{RL}(\omega) = \frac{\frac{R}{j \omega C_{2}}}{\frac{R_c}{j \omega C_{2}} + \frac{L_{c}}{C_{2}}+(R_{c}+j(\omega L_{c}-\frac{1}{\omega C_{2}}))(R+j(\omega L_{1}-\frac{1}{\omega C_{1}}))}
+$$
+
+An optimizer is used to maximize the transfer functions $-3\, \mathrm{dB}$ bandwidth to find the optimal values of these two elements. The final compensation network parameters were determined as $R_c = 64.23\, \Omega$ and $L_c = 5.35\, \mathrm{mH}$, achieving a bandwidth of approximately $13\, \mathrm{kHz}$ from around $34$ to $47\, \mathrm{kHz}$ with a passband ripple of $10.8\, \mathrm{dB}$ (see figure 2). $R_c$ and $L_c$ are rounded to $50\, \Omega$ and $4.7\, \mathrm{mH}$, respectively, to align with standard component values. These minor deviations, however, have a negligible impact on the bandwidth as they just move the poles absolute but not relative. Note that $R_c$ is around $14\, \Omega$ smaller because of the DC resistance of the used inductor.
+
+<div className="w-full flex justify-center my-8">
+  <Cover
+    src="/blog/compensating-piezoelectric-transducers/piezo_transfer_function.svg"
+    alt="Compensated and uncompensated transfer function to the external acoustic load R of the Prowave 400PT160 after to the equivalent circuit model."
+    caption="Figure 2: Compensated and uncompensated transfer function to the external acoustic load R of the Prowave 400PT160 after to the equivalent circuit model."
+  />
+</div>
+
+To equalize the transducer's magnitude, inverse FIR equalization is applied during playback using a 63-tap linear phase filter. The transducer is powered by a rail-to-rail operational amplifier (STMicroelectronics TSB582) operating at $24\, \mathrm{V}$, supplied by a boost converter (Texas Instruments TPS61170). The amplifier is configured in an inverting configuration with a gain of 4 and an offset voltage set to half the supply voltage, enabling a full output swing. With a maximum output of $8.5\, \mathrm{V_{rms}}$, the transducer achieves a theoretical output level of $105\, \mathrm{dB\, SPL}$ at $1\, \mathrm{m}$. The analog signal for the transducer is generated by an ESS Technology ES9080 8-channel digital to analog converter (DAC).
+
+---
+
+## Measurements
+
+### Methods
+
+The measurements were conducted in the anechoic chamber "Lampio" at the Acoustics Lab of Aalto University.
+
+Measurements were carried out at a fixed distance of $1\, \mathrm{m}$ between the device and the measurement equipment. A Python script is employed to automate the measurement process.
+
+A GRAS 46BF 1/4" microphone with a calibrated frequency response up to $100\, \mathrm{kHz}$ is employed. This microphone is powered and conditioned via a GRAS 12AQ preamplifier, and the output signal is fed into an RME Fireface UFX+ interface at a sampling rate of $192\, \mathrm{kHz}$. The measurement system is calibrated using a GRAS 42AP calibrator at $250\, \mathrm{Hz}$ and $114\, \mathrm{dB\, SPL}$. The system is configured to capture a maximum of $120.6\, \mathrm{dB\, SPL}$.
+
+### Results
+
+The performance of the piezoelectric transducer is evaluated using a $1 \, \mathrm{s}$ linear frequency sweep from $20\, \mathrm{kHz}$ to $96\, \mathrm{kHz}$, played at $-12\, \mathrm{dBFS}$. The resulting amplitude spectrum is derived through frequency division and further smoothed with a Gaussian filter.
+
+<div className="w-full flex justify-center my-8">
+  <Cover
+    src="/blog/compensating-piezoelectric-transducers/piezo_as_eq.svg"
+    alt="Amplitude spectrum of the average of eight different piezoelectric transducers."
+    caption="Figure 3: Amplitude spectrum of the average of eight different piezoelectric transducers. Black: unequalized. Blue: equalized."
+  />
+</div>
+
+The on-axis amplitude spectrum is analyzed by the average response of eight different transducers. The results, shown in black in figure 3, indicate a relatively flat plateau at approximately $98\, \mathrm{dB\, SPL}$ within the passband. The spectrum begins to roll off steeply beyond $38\, \mathrm{kHz}$ and $46\, \mathrm{kHz}$, with a rate of around $40\, \mathrm{dB/dec}$. Between $51\, \mathrm{kHz}$ and $62\, \mathrm{kHz}$, the response shows an uneven pattern with a lower amplitude of approximately $75\, \mathrm{dB\, SPL}$. The shaded region in the plot shows the minimum and maximum response across all eight transducers, revealing a deviation of up to $2\, \mathrm{dB}$ in the passband and up to $9\, \mathrm{dB}$ in the roll-off regions.
+
+The equalized response, shown in blue in figure 3, is relatively constant between $34\, \mathrm{kHz}$ and $49\, \mathrm{kHz}$ at an average amplitude of $95\, \mathrm{dB\, SPL}$. This provides a usable frequency range of $15\, \mathrm{kHz}$, defined by the $-3\, \mathrm{dB}$ boundaries, from $35\, \mathrm{kHz}$ to $50\, \mathrm{kHz}$.
+
+---
+
+## Conclusion
+
+The piezoelectric transducer achieved significant bandwidth extension through the compensation network, but the results deviated from the designed two-pole compensation model. This discrepancy suggests that the simplified model of the transducer may only partially capture its real-world behavior. A more detailed transducer model could improve future designs. Despite this limitation, the compensation network combined with equalization successfully achieved a usable $15\, \mathrm{kHz}$ bandwidth. Variability in the transducer's magnitude response was observed due to tolerances in the physical inductor elements ($\pm 20\%$) and the transducer itself. These variations suggest that individually equalizing each transducer could further optimize performance. The radiation pattern presented mixed results: at $40\, \mathrm{kHz}$ and $50\, \mathrm{kHz}$, the expected forward beaming was observed due to the smaller wavelengths relative to the transducer dimensions. However, at $35\, \mathrm{kHz}$ and $45\, \mathrm{kHz}$, the pattern lacked a clear forward lobe, instead displaying strong side lobes and nulls, resulting in an uneven response.
+
+---
+
+## Repository
+
+See piezo_compensation
+
+---
+
+## References
+[^1]: **A. Streicher, R. Muller, J. Hallam, H. Peremans, R. Lerch**, *"Ultrasonic transducer for matching the performance of natural sonar systems"*, (2004)
+[^2]:  **S. A. Pullano, C. D. Critello, M. G. Bianco, M. Menniti, A. S. Fiorillo**, *"PVDF Ultrasonic Sensors for In-Air Applications: A Review"*, IEEE Trans. Ultrason. Ferroelectr. Freq. Control vol. 68 no. 7 pp. 2324–2335, (2021) [Online](https://ieeexplore.ieee.org/document/9424615)
+[^3]: **M. Prokic**, _"Piezoelectric Transducers: Modeling and Characterization"_, MP Interconsulting, (2004) [Online](https://books.google.com/books?id=0ENvGwAACAAJ)
+[^4]: **R. Queirós, P. S. Girão, A. C. Serra**, *"Single-mode piezoelectric ultrasonic transducer equivalent circuit parameter calculations and optimization using experimental data"*, (2005)
+[^5]: **J. R. Gonzalez, C. J. Bleakley**, *"High-precision robust broadband ultrasonic location and orientation estimation"*, IEEE J. Sel. Topics Signal Process. vol. 3 no. 5 pp. 832–844, (2009) [Online](http://ieeexplore.ieee.org/document/5290377/)

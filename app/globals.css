@@ -11,6 +11,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -29,4 +30,29 @@
   --sh-jsxliterals: #7aa2f7;
   --sh-property: #73daca;
   --sh-entity: #e0af68;
+}
+
+.prose .katex {
+  font-size: 1em;
+}
+
+a[data-footnote-ref] {
+  all: unset;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  color: inherit;
+  cursor: pointer;
+  vertical-align: baseline !important;
+  text-transform: none !important;
+  font-variant: normal !important;
+}
+
+a[data-footnote-ref]::before {
+  content: "[";
+}
+
+a[data-footnote-ref]::after {
+  content: "]";
 }

@@ -7,8 +7,19 @@ type Project = {
 }
 
 type WorkExperience = {
+  description: any
   company: string
   title: string
+  start: string
+  end: string
+  link: string
+  id: string
+}
+
+type Education = {
+  description: any
+  institution: string
+  degree: string
   start: string
   end: string
   link: string
@@ -49,77 +60,151 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'Reglazed Studio',
-    title: 'CEO',
-    start: '2024',
-    end: 'Present',
-    link: 'https://ibelick.com',
+    company: 'Georg Neumann GmbH',
+    title: 'Research Intern',
+    start: '01/2024',
+    end: '03/2024',
+    link: 'https://www.neumann.com/',
     id: 'work1',
+    description: [
+      'Developed a background-noise-adaptive room impulse response measurement algorithm using Python'
+    ],
   },
   {
-    company: 'Freelance',
-    title: 'Design Engineer',
-    start: '2022',
-    end: '2024',
-    link: 'https://ibelick.com',
+    company: 'Professorship AIP, Technical University of Munich',
+    title: 'Teaching Assistant',
+    start: '04/2023',
+    end: '07/2023',
+    link: 'https://www.ce.cit.tum.de/en/aip/home/',
     id: 'work2',
+    description: [
+      'Supervised coding classes (~10 participants) on signal processing for audio effects using MATLAB'
+    ],
   },
   {
-    company: 'Freelance',
-    title: 'Front-end Developer',
-    start: '2017',
-    end: 'Present',
-    link: 'https://ibelick.com',
+    company: 'Harman GmbH',
+    title: 'Working Student, Audio Engineering',
+    start: '03/2022',
+    end: '10/2022',
+    link: 'https://www.harman.com/',
     id: 'work3',
+    description: [
+      'Developed and validated algorithms for loudspeaker equalization in car audio systems using MATLAB',
+    ],
+  },
+  {
+    company: 'Silver Atena GmbH',
+    title: 'Working Student, Circuit Design',
+    start: '09/2021',
+    end: '02/2022',
+    link: 'https://www.silver-atena.com/',
+    id: 'work4',
+    description: [
+      'Designed and simulated a high-power CLLC resonant converter using ngSpice and Python',
+    ],
+  },
+]
+
+export const EDUCATION: Education[] = [
+  {
+    institution: 'Technical University of Munich',
+    degree: 'M.Sc. Electrical Engineering and Information Technology',
+    start: '04/2022',
+    end: '03/2025',
+    link: 'https://www.tum.de/',
+    id: 'education1',
+    description: [
+      'Relevant coursework: ASIP Design Hackathon, Deep Learning and Inverse Problems, DSP for Audio Technologies, Embedded System Design for Machine Learning, Embedded Systems and Security, Machine Learning and Optimization, Multirate Signal Processing, Musical Acoustics, Seminar on Audio Research, Technical Acoustics, The Auditory System',
+      'Master’s thesis on “Ultrasonic Hearing for Human Echolocation”'
+    ],
+  },
+  {
+    institution: 'Acoustics Lab, Aalto University',
+    degree: 'Master’s Thesis',
+    start: '06/2024',
+    end: '11/2024',
+    link: 'https://www.aalto.fi/en/aalto-acoustics-lab',
+    id: 'education2',
+    description: [
+      'Designed hardware and DSP of a wearable PoC device for ultrasonic-based spatial echolocation',
+      'Included a multiboard design with an XMOS MCU, broadband impedance-compensated piezo transducers, ultrasonic arc unit, MEMS microphone array, wireless capability, and BMS',
+      'Supported by the EIKON e.V. scholarship (TUM)'
+    ],
+  },
+  {
+    institution: 'Technical University of Munich',
+    degree: 'B.Sc. Electrical Engineering and Information Technology',
+    start: '10/2018',
+    end: '03/2022',
+    link: 'https://www.tum.de/',
+    id: 'education3',
+    description: [
+      'Relevant coursework: Amplifier Circuits, Communication Acoustics, Real-Time Systems, Real-Time Programming Lab, Signal Processing',
+      'Bachelor’s thesis on “Simulation of diﬀuse reverb with scattering coeﬃcients”'
+    ],
   },
 ]
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: 'Exploring the Intersection of Design, AI, and Design Engineering',
-    description: 'How AI is changing the way we design',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
+    title: 'Extending the Bandwidth of Piezoelectric Transducers with Passive Compensation',
+    description: 'A practical study on extending the bandwidth of a piezoelectric transducer using passive R-L compensation and circuit optimization',
+    link: '/blog/compensating-piezoelectric-transducers',
     uid: 'blog-1',
   },
   {
-    title: 'Why I left my job to start my own company',
+    title: 'Spark Gap Discharge as Ultrasonic Sound Source',
     description:
-      'A deep dive into my decision to leave my job and start my own company',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
+      'Writing in progress. This article is currently in development.',
+    link: '',
     uid: 'blog-2',
   },
   {
-    title: 'What I learned from my first year of freelancing',
+    title: 'XMOS AI Development Board for Portable Applications',
     description:
-      'A look back at my first year of freelancing and what I learned',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
+      'Writing in progress. This article is currently in development.',
+    link: '',
     uid: 'blog-3',
   },
   {
-    title: 'How to Export Metadata from MDX for Next.js SEO',
-    description: 'A guide on exporting metadata from MDX files to leverage Next.js SEO features.',
-    link: '/blog/example-mdx-metadata',
+    title: 'A Note on Room Impulse Response (RIR) measurement quality metrics',
+    description:
+      'Writing in progress. This article is currently in development.',
+    link: '',
     uid: 'blog-4',
+  },
+  {
+    title: 'Harmonic Fusion: A Electro-Smith DAISY based Eurorack Module',
+    description:
+      'Writing in progress. This article is currently in development.',
+    link: '',
+    uid: 'blog-5',
+  },
+  {
+    title: 'A Note on Spatial Distribution of the Diffuse Energy in Reverb',
+    description:
+      'Writing in progress. This article is currently in development.',
+    link: '',
+    uid: 'blog-6',
+  },
+  {
+    title: 'Multithreaded Oprating Point Simulation with ngSpice and KiCad',
+    description:
+      'Writing in progress. This article is currently in development.',
+    link: '',
+    uid: 'blog-7',
   },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'Github',
-    link: 'https://github.com/ibelick',
-  },
-  {
-    label: 'Twitter',
-    link: 'https://twitter.com/ibelick',
+    link: 'https://github.com/crsknr',
   },
   {
     label: 'LinkedIn',
-    link: 'https://www.linkedin.com/in/ibelick',
-  },
-  {
-    label: 'Instagram',
-    link: 'https://www.instagram.com/ibelick',
+    link: 'https://www.linkedin.com/in/christoph-kiener',
   },
 ]
 
-export const EMAIL = 'your@email.com'
+export const EMAIL = 'christoph.kiener@outlook.com'

@@ -70,7 +70,7 @@ export function Footer() {
   return (
     <footer className="mt-24 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
       <div className="flex items-center justify-between">
-        <a href="statements" target="_blank" rel="noopener noreferrer">
+        <a href="statements" target="_blank" >
           <TextLoop className="text-xs text-zinc-500">
             <span>© 2025 Christoph Kiener</span>
             <span>All rights reserved ↗</span>

@@ -9,7 +9,7 @@ export function Header() {
       <div className="flex items-center space-x-4">
         <Link href="/" className="font-medium text-black dark:text-white">
           <Image
-            src="profile.jpg"
+            src="/profile.jpg"
             alt="Christoph Kiener"
             width={128}
             height={128}

@@ -4,8 +4,10 @@ import rehypeKatex from 'rehype-katex';
 import remarkFootnotes from 'remark-footnotes';
 
 /** @type {import('next').NextConfig} */
-const baseConfig = {
+const nextConfig = {
+  reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  output: 'export',
 };
 
 const withMDX = createMDX({
@@ -16,9 +18,4 @@ const withMDX = createMDX({
   },
 });
 
-const finalConfig = withMDX({
-  ...baseConfig,
-  output: 'export',
-});
-
-export default finalConfig;
+export default withMDX(nextConfig);

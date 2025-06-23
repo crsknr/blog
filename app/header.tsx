@@ -7,9 +7,9 @@ export function Header() {
   return (
     <header className="mb-8 flex items-center justify-between">
       <div className="flex items-center space-x-4">
-        <Link href="/" className="font-medium text-black dark:text-white">
+        <Link href="./" className="font-medium text-black dark:text-white">
           <img
-            src="/profile.jpg"
+            src="./profile.jpg"
             alt="Christoph Kiener"
             width={128}
             height={128}
@@ -18,7 +18,7 @@ export function Header() {
         </Link>
 
         <div>
-          <Link href="/" className="font-medium text-black dark:text-white">
+          <Link href="./" className="font-medium text-black dark:text-white">
             Christoph Kiener
           </Link>
           <TextEffect

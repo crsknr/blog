@@ -5,7 +5,6 @@ import remarkFootnotes from 'remark-footnotes';
 
 /** @type {import('next').NextConfig} */
 const baseConfig = {
-  reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
 

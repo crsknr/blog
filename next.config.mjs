@@ -6,6 +6,7 @@ import remarkFootnotes from 'remark-footnotes';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  basePath: "/blog",
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   output: 'export',
   images: {

@@ -12,7 +12,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tbd.com/'),
+  metadataBase: new URL('https://crsknr.github.io/blog'),
   alternates: {
     canonical: '/'
   },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: 'Christoph Kiener',
     template: '%s | Christoph Kiener'
   },
-  description: 'tbd',
+  description: 'Personal blog of Christoph Kiener',
 };
 
 const geist = Geist({

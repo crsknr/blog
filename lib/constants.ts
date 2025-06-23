@@ -1,1 +1,1 @@
-export const WEBSITE_URL = 'https://tbd.com'
+export const WEBSITE_URL = 'https://crsknr.github.io/blog'

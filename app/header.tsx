@@ -8,7 +8,7 @@ export function Header() {
     <header className="mb-8 flex items-center justify-between">
       <div className="flex items-center space-x-4">
         <Link href="/" className="font-medium text-black dark:text-white">
-          <img
+          <Image
             src="profile.jpg"
             alt="Christoph Kiener"
             width={128}

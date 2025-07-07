@@ -58,6 +58,57 @@ export const PROJECTS: Project[] = [
   },
 ]
 
+export const BLOG_POSTS: BlogPost[] = [
+  {
+    title: 'Extending the Bandwidth of Piezoelectric Transducers with Passive Compensation',
+    description: 'A practical study on extending the bandwidth of a piezoelectric transducer using passive R-L compensation and circuit optimization',
+    link: '/blog/compensating-piezoelectric-transducers',
+    uid: 'blog-1',
+  },
+  {
+    title: 'Spark Gap Discharge as Ultrasonic Sound Source',
+    description:
+      'Writing in progress. This article is currently in development.',
+    link: '',
+    uid: 'blog-2',
+  },
+  {
+    title: 'XMOS AI Development Board for Portable Applications',
+    description:
+      'Writing in progress. This article is currently in development.',
+    link: '',
+    uid: 'blog-3',
+  },
+  {
+    title: 'A Note on Room Impulse Response (RIR) measurement quality metrics',
+    description:
+      'Writing in progress. This article is currently in development.',
+    link: '',
+    uid: 'blog-4',
+  },
+  {
+    title: 'Harmonic Fusion: A Electro-Smith DAISY based Eurorack Module',
+    description:
+      'Writing in progress. This article is currently in development.',
+    link: '',
+    uid: 'blog-5',
+  },
+  {
+    title: 'A Note on Spatial Distribution of the Diffuse Energy in Reverb',
+    description:
+      'Writing in progress. This article is currently in development.',
+    link: '',
+    uid: 'blog-6',
+  },
+  {
+    title: 'Multithreaded Operating Point Simulation with ngSpice and KiCad',
+    description:
+      'Writing in progress. This article is currently in development.',
+    link: '',
+    uid: 'blog-7',
+  },
+]
+
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     company: 'Georg Neumann GmbH',
@@ -145,56 +196,38 @@ export const EDUCATION: Education[] = [
   },
 ]
 
-export const BLOG_POSTS: BlogPost[] = [
-  {
-    title: 'Extending the Bandwidth of Piezoelectric Transducers with Passive Compensation',
-    description: 'A practical study on extending the bandwidth of a piezoelectric transducer using passive R-L compensation and circuit optimization',
-    link: '/blog/compensating-piezoelectric-transducers',
-    uid: 'blog-1',
-  },
-  {
-    title: 'Spark Gap Discharge as Ultrasonic Sound Source',
-    description:
-      'Writing in progress. This article is currently in development.',
-    link: '',
-    uid: 'blog-2',
-  },
-  {
-    title: 'XMOS AI Development Board for Portable Applications',
-    description:
-      'Writing in progress. This article is currently in development.',
-    link: '',
-    uid: 'blog-3',
-  },
-  {
-    title: 'A Note on Room Impulse Response (RIR) measurement quality metrics',
-    description:
-      'Writing in progress. This article is currently in development.',
-    link: '',
-    uid: 'blog-4',
-  },
-  {
-    title: 'Harmonic Fusion: A Electro-Smith DAISY based Eurorack Module',
-    description:
-      'Writing in progress. This article is currently in development.',
-    link: '',
-    uid: 'blog-5',
-  },
-  {
-    title: 'A Note on Spatial Distribution of the Diffuse Energy in Reverb',
-    description:
-      'Writing in progress. This article is currently in development.',
-    link: '',
-    uid: 'blog-6',
-  },
-  {
-    title: 'Multithreaded Operating Point Simulation with ngSpice and KiCad',
-    description:
-      'Writing in progress. This article is currently in development.',
-    link: '',
-    uid: 'blog-7',
-  },
-]
+// data.ts
+export const TOOLS_TECH: {
+  id: string;
+  title: string;
+  items: string[];
+}[] = [
+    {
+      id: 'languages',
+      title: 'Languages & Libraries',
+      items: ['C', 'C++', 'JUCE', 'MATLAB', 'Python', 'VCV Rack', 'VHDL'].sort(),
+    },
+    {
+      id: 'embedded',
+      title: 'Embedded Platforms & RTOS',
+      items: ['Embedded Linux', 'ESP32', 'FreeRTOS', 'Rockchip', 'STM32', 'XMOS'].sort(),
+    },
+    {
+      id: 'circuits',
+      title: 'Circuit Design & Simulation',
+      items: ['KiCad', 'LTspice', 'ngSpice'].sort(),
+    },
+    {
+      id: 'design',
+      title: 'Design & Prototyping',
+      items: ['FreeCAD', 'OpenSCAD', 'Penpot', 'Vectary', 'draw.io'].sort(),
+    },
+    {
+      id: 'productivity',
+      title: 'Productivity & Documentation',
+      items: ['Git', 'Obsidian', 'ResearchRabbit', 'Texifier', 'Zotero'].sort(),
+    },
+  ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {

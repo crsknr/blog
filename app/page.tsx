@@ -14,9 +14,10 @@ import Link from 'next/link'
 import { AnimatedBackground } from '@/components/ui/animated-background'
 import {
   PROJECTS,
+  BLOG_POSTS,
   WORK_EXPERIENCE,
   EDUCATION,
-  BLOG_POSTS,
+  TOOLS_TECH,
   EMAIL,
   SOCIAL_LINKS,
 } from './data'
@@ -138,7 +139,7 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Documenting a journey through code, circuits, and DSP
+            Documenting a journey through code, circuits, and DSP.
           </p>
         </div>
       </motion.section>
@@ -293,6 +294,36 @@ export default function Personal() {
                       ))}
                     </ul>
                   )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <h3 className="mb-5 text-lg font-medium">Tools & Technologies I Use</h3>
+        <div className="flex flex-col space-y-2">
+          {TOOLS_TECH.map((category) => (
+            <div
+              key={category.id}
+              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
+            >
+              <Spotlight
+                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+                size={64}
+              />
+              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
+                <div className="flex flex-col space-y-2">
+                  <h4 className="font-normal text-zinc-800 dark:text-zinc-100">
+                    {category.title}
+                  </h4>
+                  <p className="text-sm text-zinc-700 dark:text-zinc-400">
+                    {category.items.join(', ')}
+                  </p>
                 </div>
               </div>
             </div>

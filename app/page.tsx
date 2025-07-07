@@ -138,7 +138,7 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Exploring embedded hardware systems with a passion for audio technology
+            Documenting a journey through code, circuits, and DSP
           </p>
         </div>
       </motion.section>

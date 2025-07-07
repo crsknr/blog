@@ -188,7 +188,7 @@ export const BLOG_POSTS: BlogPost[] = [
     uid: 'blog-6',
   },
   {
-    title: 'Multithreaded Oprating Point Simulation with ngSpice and KiCad',
+    title: 'Multithreaded Operating Point Simulation with ngSpice and KiCad',
     description:
       'Writing in progress. This article is currently in development.',
     link: '',

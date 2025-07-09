@@ -68,8 +68,8 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     title: 'Spark Gap Discharge as Ultrasonic Sound Source',
     description:
-      'Writing in progress. This article is currently in development.',
-    link: '',
+      'An experimental impulsive broadband ultrasonic emitter using spark discharge and acoustic horn filtering',
+    link: '/blog/ultrasonic-spark-gap-source',
     uid: 'blog-2',
   },
   {
@@ -196,7 +196,6 @@ export const EDUCATION: Education[] = [
   },
 ]
 
-// data.ts
 export const TOOLS_TECH: {
   id: string;
   title: string;

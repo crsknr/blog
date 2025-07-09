@@ -1,0 +1,116 @@
+export const metadata = {
+  title: 'Spark Gap Discharge as Ultrasonic Sound Source',
+  description: 'This post explores the use of spark gap discharge as an impulsive broadband ultrasonic sound source. A hyperbolic multicellular horn array acts as an acoustic high-pass filter to suppress audible components and shape the radiation pattern. The system’s performance is validated through time-domain, spectral, and polar measurements.',
+  authors: [{ name: 'Christoph Kiener', url: 'https://crsknr.github.io/blog' }],
+};
+
+03 Dec 2024
+
+# Spark Gap Discharge as Ultrasonic Sound Source
+
+This post explores the use of spark gap discharge as an impulsive broadband ultrasonic sound source. A hyperbolic multicellular horn array acts as an acoustic high-pass filter to suppress audible components and shape the radiation pattern. The system’s performance is validated through time-domain, spectral, and polar measurements.
+
+---
+
+## Design
+
+A spark discharge can be used as an impulsive ultrasonic sound source. It creates an electric discharge between two electrodes, rapidly ionizing the surrounding gas. The process heats the gas, causing it to expand rapidly and emit an impulsive pressure wave[^1]. The sound the spark gap emits spans a wide frequency range, including ultrasonic frequencies. The spectrum of the emitted sound is characterized by its relationship to the instantaneous discharge energy $E_0$, as the dominant frequency $f_n$, is inversely proportional to  $\sqrt[3]{E_0}$. Below  $f_n$, the spectrum decays at  $20\, \mathrm{dB/dec}$, while above  $f_n$, it decays at $40\, \mathrm{dB/dec}$ until  $2f_n$, where the decay then resumes at $20\, \mathrm{dB/dec}$[^2]. These properties make the spark gap an effective quasi-impulse source with its radiation pattern found to be quite omnidirectional[^3].
+
+The spark gap is based upon a generic spark generator module using a resonant converter design (see figure 1). The module operates by generating a $200\, \mathrm{kHz}$ square wave that drives a high-turn-ratio transformer ($\sim$1:1000) with a half-bridge MOSFET circuit. The transformer's secondary winding then charges a high-voltage capacitor ($1000\, \mathrm{pF}$, $20\, \mathrm{kV}$) through a half-wave rectifier. Once the capacitor voltage reaches the airs' breakdown threshold of approximately $3\, \mathrm{kV/mm}$, the capacitor discharges through the spark electrodes, releasing the stored energy as a spark. The electrodes are simple copper wire segments with no special end curvature, spaced $1\, \mathrm{mm}$ apart to ensure a discharge at approximately $3\, \mathrm{kV}$. The resulting energy release, calculated as  $E_c = \frac{1}{2} C V^2$, is approximately $4.5\, \mathrm{mJ}$, corresponding to a dominant frequency of roughly $f_n = 70\, \mathrm{kHz}$. While the capacitor charges until discharge, the arc ignition timing remains asynchronous, introducing variability in spark initiation time.
+
+To minimize electromagnetic interference, a $\pi$-filter is added to the module's input to suppress switching noise, preventing it from spreading into the rest of the system. A MOSFET, controlled by the PU, enables the spark generator.
+
+In its raw form, the spark gap emits energy across both the audible and ultrasonic frequency ranges. To remove the audible content, a hyperbolic horn is used as an acoustic high-pass filter[^4]. The horn is designed with a cutoff frequency of $10\, \mathrm{kHz}$, below which the throat impedance is predominantly reactive and transmits minimal energy. The cutoff frequency is not set higher due to manufacturability issues. The throat area of the horn is set at $1\, \mathrm{mm}^2$, matching the physical size of the $1\, \mathrm{mm}$ spark gap. A shape parameter and thus quality factor of $T = 0.707$ is used to have the steepest roll-off without a resonance at the cutoff frequency. The horn length is set to $17.15\, \mathrm{mm}$, corresponding to half the wavelength at the cutoff frequency, so the first and strongest resonance in the horn falls into the cutoff frequency. The horn's surface follows the hyperbolic equation with a rectangular cross-section.
+
+A multicellular horn approach is implemented to provide the coverage of the horizontal plane, consisting of eight individual horns arranged in a radial pattern. Each horn is 3D-printed using SLA technology, ensuring the necessary precision at this small scale. The assembled horn array is mounted above the spark generator and its supporting electronics. A photograph of the completed horn array and spark unit is shown in figure 2.
+
+<div className="max-w-sm w-full flex justify-center mx-auto my-8">
+  <Cover
+    src="/blog/blog/ultrasonic-spark-gap-source/spark_unit.jpg"
+    alt="The generic spark unit. From left to right: PCB with half bridge drive circuit, high voltage transformer, rectifier with discharge capacitor."
+    caption="Figure 1: The generic spark unit. From left to right: PCB with half bridge drive circuit, high voltage transformer, rectifier with discharge capacitor."
+  />
+</div>
+
+<div className="max-w-sm w-full flex justify-center mx-auto my-8">
+  <Cover
+    src="/blog/blog/ultrasonic-spark-gap-source/spark_horn.jpg"
+    alt="The eight cell multicellular horn with the electrodes in the center of the arrangement. Below is the generic spark unit in a 3D-printed enclosure."
+    caption="Figure 2: The eight cell multicellular horn with the electrodes in the center of the arrangement. Below is the generic spark unit in a 3D-printed enclosure."
+  />
+</div>
+
+---
+
+## Measurements
+
+### Methods
+
+The measurements were conducted in the anechoic chamber "Lampio" at the Acoustics Lab of Aalto University.
+
+Measurements were carried out at a fixed distance of $1\, \mathrm{m}$ between the device and the measurement equipment. A Python script is employed to automate the measurement process. Three measurement types are performed: polar response, on-axis amplitude spectra, and noise floor characterization.
+
+A GRAS 46BF 1/4" microphone with a calibrated frequency response up to $100\, \mathrm{kHz}$ is employed. This microphone is powered and conditioned via a GRAS 12AQ preamplifier, and the output signal is fed into an RME Fireface UFX+ interface at a sampling rate of $192\, \mathrm{kHz}$. The measurement system is calibrated using a GRAS 42AP calibrator at $250\, \mathrm{Hz}$ and $114\, \mathrm{dB\, SPL}$. The system is configured to capture a maximum of $120.6\, \mathrm{dB\, SPL}$.
+
+Polar plot measurements are conducted using an Outline ET250R2-3D automated turntable, which provides angular control with a resolution of $1^\circ$.
+
+### Results
+
+The performance of the spark gap as an ultrasonic source is evaluated by analyzing its time-domain response, amplitude spectral density, and horizontal polar response.
+
+The time-domain response of a single spark discharge has a maximum amplitude of the resulting pressure wave of $3.7\, \mathrm{Pa}$, corresponding to $105.3\, \mathrm{dB\, SPL}$. The waveform consists of an initial positive peak, a smaller negative peak, and a decaying tail (see figure 3).
+
+<div className="w-full flex justify-center my-8">
+  <Cover
+    src="/blog/blog/ultrasonic-spark-gap-source/spark_td.svg"
+    alt="Pressure response of one spark ignition."
+    caption="Figure 3: Pressure response of one spark ignition."
+  />
+</div>
+
+The amplitude spectral density of the spark discharge is derived using the Welch method[^5]. The amplitude spectral density is plotted for both the noise floor and for one spark discharge (see figure 4). The spectral density remains relatively constant at approximately $25\, \mathrm{dB\, SPL/\sqrt{Hz}}$ over the range from $14\, \mathrm{kHz}$ to $96\, \mathrm{kHz}$. Below $14\, \mathrm{kHz}$, the amplitude spectral density begins to roll off at approximately $60\, \mathrm{dB/dec}$, eventually merging with the noise floor.
+
+<div className="w-full flex justify-center my-8">
+  <Cover
+    src="/blog/blog/ultrasonic-spark-gap-source/spark_asd.svg"
+    alt="Amplitude spectrum density of sprak."
+    caption="Figure 4: Amplitude spectrum density of sprak."
+  />
+</div>
+
+The polar response is analyzed at $20\, \mathrm{kHz}$, $40\, \mathrm{kHz}$, $60\, \mathrm{kHz}$, and $80\, \mathrm{kHz}$, with the horn array's openings aligned at $45^\circ$ intervals relative to $0^\circ$ (see figure 5). At $20\, \mathrm{kHz}$, the radiation pattern is relatively omnidirectional, with slight lobes forming around each horn opening. At $40\, \mathrm{kHz}$, strong lobes emerge at the intersections of the horns, while valleys are observed directly at the horn openings, with an attenuation of approximately $-10\, \mathrm{dB}$. At $60\, \mathrm{kHz}$, the response diminishes significantly in the area from $45^\circ$ to $225^\circ$, while pronounced lobes are still evident in this range combined with reduced radiation compared to the opposite side. At $80\, \mathrm{kHz}$, the response becomes more irregular, with increased deviation across the pattern. The overall response is weaker in the $45^\circ$ to $225^\circ$ region.
+
+<div className="w-full flex justify-center my-8">
+  <Cover
+    src="/blog/blog/ultrasonic-spark-gap-source/spark_polar.svg"
+    alt="Normalized amplitude spectral density of one spark ignition at 1m."
+    caption="Figure 5: Normalized amplitude spectral density of one spark ignition at 1m."
+  />
+</div>
+
+---
+
+## Conclusion
+
+The spark gap source provides an interesting alternative as a broadband impulsive source. However, the capacitor charging circuit introduces jitter in spark ignition, making the discharge timing nondeterministic. The radiation pattern showed strong interference patterns at higher frequencies due to the multicellular horn array. Further asymmetries were probably caused by imperfections in individual 3D-printed horns and their slight misalignment. However, the high-pass characteristics of the horn design were validated.
+
+---
+
+## Repository
+
+See [ultrasonic_spark_gap-source](https://github.com/crsknr/ultrasonic_spark_gap-source)
+
+---
+
+## References
+
+[^1]: **W. M. Wright**, *"Propagation in air of N waves produced by sparks"*, The Journal of the Acoustical Society of America 73(6) 1948–1955, (1983) [Online](https://pubs.aip.org/jasa/article/73/6/1948/628350/Propagation-in-air-of-N-waves-produced-by)
+
+[^2]: **R. Wyber**, *"The design of a spark discharge acoustic impulse generator"*, IEEE Transactions on Acoustics, Speech, and Signal Processing 23(2) 157–162, (1975) [Online](http://ieeexplore.ieee.org/document/1162666/)
+
+[^3]: **C. Ayrault, P. Bquin, S. Baudin**, *"Characteristics of a spark discharge as an adjustable acoustic source for scale model measurements"*, (2012)
+
+[^4]: **B. Kolbrek**, *"Horn Theory: An Introduction"*, (2008)
+
+[^5]: **P. Welch**, *"The use of fast Fourier transform for the estimation of power spectra: A method based on time averaging over short, modified periodograms"*, IEEE Transactions on Audio and Electroacoustics 15(2) 70-73, (1967) [Online](https://ieeexplore.ieee.org/document/1161901)
+

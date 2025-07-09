@@ -6,6 +6,14 @@ type Project = {
   id: string
 }
 
+type BlogPost = {
+  title: string
+  description: string
+  link: string
+  uid: string
+  date?: string
+}
+
 type WorkExperience = {
   description: any
   company: string
@@ -24,13 +32,6 @@ type Education = {
   end: string
   link: string
   id: string
-}
-
-type BlogPost = {
-  title: string
-  description: string
-  link: string
-  uid: string
 }
 
 type SocialLink = {
@@ -64,6 +65,7 @@ export const BLOG_POSTS: BlogPost[] = [
     description: 'A practical study on extending the bandwidth of a piezoelectric transducer using passive R-L compensation and circuit optimization',
     link: '/blog/compensating-piezoelectric-transducers',
     uid: 'blog-1',
+    date: '03/12/2024',
   },
   {
     title: 'Spark Gap Discharge as Ultrasonic Sound Source',
@@ -71,6 +73,7 @@ export const BLOG_POSTS: BlogPost[] = [
       'An experimental impulsive broadband ultrasonic emitter using spark discharge and acoustic horn filtering',
     link: '/blog/ultrasonic-spark-gap-source',
     uid: 'blog-2',
+    date: '03/12/2024',
   },
   {
     title: 'XMOS AI Development Board for Portable Applications',

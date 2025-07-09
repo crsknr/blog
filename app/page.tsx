@@ -202,6 +202,9 @@ export default function Personal() {
                   <p className="text-zinc-500 dark:text-zinc-400">
                     {post.description}
                   </p>
+                  <p className="text-sm text-zinc-400 dark:text-zinc-500">
+                    {post.date}
+                  </p>
                 </div>
               </Link>
             ))}

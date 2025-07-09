@@ -1,0 +1,109 @@
+export const metadata = {
+  title: 'uDSP-Card: XCORE.AI Development Board for Portable Applications',
+  description: 'his post introduces the uDSP-Card, a compact development board built on the XMOS XCORE.AI platform and tailored for portable and wearable applications. Despite its small footprint, it offers rich I/O and high-performance DSP capabilities at low power, making it ideal for audio, sensing, and real-time embedded tasks.',
+  authors: [{ name: 'Christoph Kiener', url: 'https://crsknr.github.io/blog' }],
+  keywords: [
+    'uDSP-Card',
+    'XMOS',
+    'XCORE.AI',
+    'DSP board',
+    'embedded audio',
+    'portable development board',
+    'wearable electronics',
+    'real-time signal processing',
+    'MEMS microphone interface',
+    'low power embedded system'
+  ],
+};
+
+03 Dec 2024
+
+# uDSP-Card: XCORE.AI Development Board for Portable Applications
+
+This post introduces the uDSP-Card, a compact development board built on the XMOS XCORE.AI platform and tailored for portable and wearable applications. Despite its small footprint, it offers rich I/O and high-performance DSP capabilities at low power, making it ideal for audio, sensing, and real-time embedded tasks.
+
+*Note: This article is adapted from sections of my Master’s thesis on “Ultrasonic Hearing for Human Echolocation”.*
+
+---
+
+## Overview
+
+The **uDSP-Card** was originally designed for a battery-powered, head-mounted system that interfaced with MEMS microphones, an 8-channel DAC, an ESP32-based wireless module, and a custom battery module. While tailored for this specific application, the board’s flexible I/O and modular architecture making it ideal for audio, sensing, and real-time embedded tasks.
+
+<div className="max-w-m w-full flex justify-center mx-auto my-8">
+  <Cover
+    src="/blog/blog/udsp-card/udsp_card_assembly.jpg"
+    alt="The PCB of the uDSP-Card with headphone line out, USB connector, the XCORE.AI processor and the interconnect."
+    caption="Figure 1: The PCB of the uDSP-Card with headphone line out, USB connector, the XCORE.AI processor and the interconnect."
+  />
+</div>
+
+<div className="max-w-m w-full flex justify-center mx-auto my-8">
+  <Cover
+    src="/blog/blog/udsp-card/uDSP-Card_HAD-Overview.svg"
+    alt="System overview of the uDSP-Card."
+    caption="Figure 2: System overview of the uDSP-Card."
+  />
+</div>
+
+---
+
+## Specification
+
+The **uDSP-Card** is powered by the **XMOS XU316-1024**, a dual-core 800 MHz processor featuring 16 hardware threads and a dedicated vector unit for efficient real-time signal processing. Its architecture is derived from the XMOS reference design and development board **XK-EVK-XU316**[^1], adapted for compact, low-power, portable applications.
+
+### Key Features
+
+- **Dimensions:** 60 mm × 30 mm, 6-layer PCB
+- **Integrated power management** with four onboard supply rails
+- **128 Mb LPDDR1 RAM** for buffering and signal processing
+- **32 Mb QSPI flash** for firmware and program storage
+- **USB device interface** for power and data/audio transfer
+- **44-pin interconnect**:
+  - I²C
+  - SPI
+  - I²S (8 channels)
+  - PDM (8 channels)
+  - External power input
+- **ESS ES9033 DAC** with stereo line-level output
+- **microSD card slot** for data logging or extended storage
+- **Onboard sensors:**
+  - **BMI323** IMU
+  - **BME280** EMU
+
+<div className="max-w-m w-full flex justify-center mx-auto my-8">
+  <Cover
+    src="/blog/blog/udsp-card/uDSP-Card_HAD-System Architecture.svg"
+    alt="Block diagram showing the system architecture of the uDSP-Card and its interfaces."
+    caption="Figure 3: Block diagram showing the system architecture of the uDSP-Card and its interfaces."
+  />
+</div>
+
+<div className="max-w-m w-full flex justify-center mx-auto my-8">
+  <Cover
+    src="/blog/blog/udsp-card/udsp_card_front.png"
+    alt="3D rendering of the front side of the uDSP-Card."
+    caption="Figure 4: 3D rendering of the front side of the uDSP-Card."
+  />
+</div>
+
+<div className="max-w-m w-full flex justify-center mx-auto my-8">
+  <Cover
+    src="/blog/blog/udsp-card/udsp_card_back.png"
+    alt="3D rendering of the back side of the uDSP-Card."
+    caption="Figure 5: 3D rendering of the back side of the uDSP-Card."
+  />
+</div>
+
+---
+
+## Repository
+
+- [hw_udsp-card](https://github.com/crsknr/hw_udsp-card): KiCAD project (schematic, PCB), board architecture, pinout, and renderings
+- [lib_udsp_card_board_support](https://github.com/crsknr/lib_udsp_card_board_support): XMOS board support and configuration files
+
+---
+
+## References
+
+[^1]: **XMOS**, *"xcore.ai Explorer v2 BoardManual"*, Manual XM014531A, (2024)

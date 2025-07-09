@@ -76,11 +76,12 @@ export const BLOG_POSTS: BlogPost[] = [
     date: '03/12/2024',
   },
   {
-    title: 'XMOS AI Development Board for Portable Applications',
+    title: 'uDSP-Card: XCORE.AI Development Board for Portable Applications',
     description:
-      'Writing in progress. This article is currently in development.',
-    link: '',
+      'A compact DSP development board for real-time embedded audio and sensing',
+    link: '/blog/udsp-card',
     uid: 'blog-3',
+    date: '03/12/2024',
   },
   {
     title: 'A Note on Room Impulse Response (RIR) measurement quality metrics',

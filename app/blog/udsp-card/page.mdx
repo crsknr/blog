@@ -54,22 +54,21 @@ The **uDSP-Card** is powered by the **XMOS XU316-1024**, a dual-core 800 MHz p
 
 ### Key Features
 
-- **Dimensions:** 60 mm × 30 mm, 6-layer PCB
-- **Integrated power management** with four onboard supply rails
-- **128 Mb LPDDR1 RAM** for buffering and signal processing
-- **32 Mb QSPI flash** for firmware and program storage
-- **USB device interface** for power and data/audio transfer
-- **44-pin interconnect**:
-  - I²C
-  - SPI
-  - I²S (8 channels)
-  - PDM (8 channels)
-  - External power input
-- **ESS ES9033 DAC** with stereo line-level output
-- **microSD card slot** for data logging or extended storage
-- **Onboard sensors:**
-  - **BMI323** IMU
-  - **BME280** EMU
+- **Dimensions:** 60 mm × 30 mm (6-layer PCB)
+- **Processor:** XMOS XU316-1024 (dual-core, 800 MHz, 16 threads)
+- **RAM:** 128 Mb LPDDR1
+- **Flash:** 32 Mb QSPI
+- **microSD** card slot
+- **USB Interface:** Device (power + audio/data)
+- **Line Output:** Stereo via ESS ES9033 DAC
+- **Expansion Header:** 44-pin interconnect
+  - I²S (8ch)
+  - I²C / SPI
+  - PDM (8ch)
+  - Power input
+- **Onboard Sensors:**
+  - BMI323 IMU (accelerometer + gyro)
+  - BME280 EMU (humidity, pressure, temperature)
 
 <div className="max-w-m w-full flex justify-center mx-auto my-8">
   <Cover
@@ -100,7 +99,7 @@ The **uDSP-Card** is powered by the **XMOS XU316-1024**, a dual-core 800 MHz p
 ## Repository
 
 - [hw_udsp-card](https://github.com/crsknr/hw_udsp-card): KiCAD project (schematic, PCB), board architecture, pinout, and renderings
-- [lib_udsp_card_board_support](https://github.com/crsknr/lib_udsp_card_board_support): XMOS board support and configuration files
+- [lib_udsp_card_board_support](https://github.com/crsknr/lib_udsp_card_board_support): XCORE board support and configuration files
 
 ---
 

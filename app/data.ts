@@ -208,7 +208,7 @@ export const TOOLS_TECH: {
     {
       id: 'languages',
       title: 'Languages & Libraries',
-      items: ['C', 'C++', 'JUCE', 'MATLAB', 'Python', 'VCV Rack', 'VHDL'].sort(),
+      items: ['C', 'C++', 'JUCE', 'MATLAB', 'Python', 'Qt', 'VCV Rack', 'VHDL'].sort(),
     },
     {
       id: 'embedded',
